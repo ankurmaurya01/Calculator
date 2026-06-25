@@ -1,4 +1,4 @@
-# 🧮 My Little Calculator
+# 🧮 My Calculator
 
 A warm, notebook-style calculator built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies.
 
