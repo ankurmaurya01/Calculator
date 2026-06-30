@@ -1,0 +1,298 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Page ── */
+body {
+  min-height: 100vh;
+  background: #f0ebe0;
+  background-image:
+    radial-gradient(circle at 20% 35%, #e8d5b7 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, #d4c5a9 0%, transparent 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Patrick Hand', cursive;
+}
+
+/* ── Notebook card ── */
+.notebook {
+  display: flex;
+  width: 340px;
+  background: #fffdf7;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow:
+    2px 3px 0 #c9b89a,
+    4px 6px 0 #b8a48a,
+    0 20px 60px rgba(0,0,0,0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Lined paper effect */
+.notebook::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    #e8ddd0 27px,
+    #e8ddd0 28px
+  );
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Red margin line */
+.notebook::after {
+  content: '';
+  position: absolute;
+  left: 72px;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: rgba(220, 100, 100, 0.35);
+  pointer-events: none;
+}
+
+/* ── Spiral binding ── */
+.spirals {
+  width: 32px;
+  background: #d4c9b8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 24px 0;
+  flex-shrink: 0;
+  z-index: 2;
+  border-right: 2px solid #b8a88a;
+}
+
+.hole {
+  width: 20px;
+  height: 20px;
+  background: #f0ebe0;
+  border-radius: 50%;
+  border: 2px solid #a89880;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.hole::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #c8b8a0;
+  border-radius: 50%;
+}
+
+/* ── Content ── */
+.content {
+  flex: 1;
+  padding: 20px 16px 16px 16px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Title ── */
+.title-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 1.5px solid #e0d0bc;
+  padding-bottom: 8px;
+}
+
+.label {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  font-weight: 700;
+  color: #5a4a3a;
+  letter-spacing: 0.5px;
+}
+
+.doodle {
+  font-size: 18px;
+  color: #c8a050;
+  transform: rotate(15deg);
+  display: inline-block;
+}
+
+/* ── Tape receipt strip ── */
+.tape {
+  font-family: 'Caveat', cursive;
+  font-size: 13px;
+  color: #8a7a6a;
+  line-height: 1.7;
+  min-height: 36px;
+  max-height: 70px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 4px;
+  scrollbar-width: none;
+}
+.tape::-webkit-scrollbar { display: none; }
+
+/* ── Display ── */
+.display-box {
+  background: #f7f3e8;
+  border: 2px solid #c8b898;
+  border-radius: 8px;
+  padding: 10px 12px 8px;
+  margin-bottom: 16px;
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.07),
+    2px 2px 0 #c8b898;
+  position: relative;
+}
+
+/* little sticky-tape corners */
+.display-box::before,
+.display-box::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 12px;
+  background: rgba(255, 230, 100, 0.55);
+  border-radius: 2px;
+  transform: rotate(-3deg);
+}
+.display-box::before { top: -6px; left: 10px; transform: rotate(-4deg); }
+.display-box::after  { bottom: -6px; right: 10px; transform: rotate(3deg); }
+
+.screen {
+  text-align: right;
+}
+
+.expression {
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  color: #9a8a78;
+  min-height: 20px;
+  letter-spacing: 0.5px;
+}
+
+.result {
+  font-family: 'Caveat', cursive;
+  font-size: 44px;
+  font-weight: 700;
+  color: #3a2e22;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  word-break: break-all;
+  transition: transform 0.1s ease;
+}
+
+.result.pop {
+  transform: scale(1.05);
+}
+
+/* ── Keypad ── */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+
+/* ── Buttons ── */
+.btn {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  font-weight: 600;
+  color: #3a2e22;
+  background: #fffdf5;
+  border: 2px solid #c8b898;
+  border-radius: 10px;
+  padding: 12px 4px;
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s, background 0.08s;
+  box-shadow: 2px 3px 0 #b8a880;
+  position: relative;
+  user-select: none;
+  /* slight random tilt for handmade feel */
+}
+
+.btn:nth-child(3n+1) { transform: rotate(-0.4deg); }
+.btn:nth-child(3n+2) { transform: rotate(0.3deg); }
+.btn:nth-child(3n)   { transform: rotate(-0.2deg); }
+
+.btn:hover {
+  background: #fff8e8;
+  box-shadow: 3px 4px 0 #b0986a;
+}
+
+.btn:active {
+  transform: rotate(0deg) translateY(2px) !important;
+  box-shadow: 0 1px 0 #b8a880 !important;
+}
+
+/* Function buttons (AC, +/−, %) */
+.btn-func {
+  background: #e8e0d0;
+  color: #5a4a3a;
+  border-color: #b8a888;
+  box-shadow: 2px 3px 0 #a09070;
+}
+
+.btn-func:hover {
+  background: #ddd5c0;
+}
+
+/* Operator buttons */
+.btn-op {
+  background: #ffe8b0;
+  color: #8a5a10;
+  border-color: #d4a840;
+  box-shadow: 2px 3px 0 #b88820;
+  font-size: 24px;
+}
+
+.btn-op:hover {
+  background: #ffd880;
+}
+
+/* Zero (wide) */
+.btn-zero {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: 18px;
+}
+
+/* Equals */
+.btn-eq {
+  background: #6ab87a;
+  color: #1a4020;
+  border-color: #4a9858;
+  box-shadow: 2px 3px 0 #3a7848;
+  font-size: 26px;
+}
+
+.btn-eq:hover {
+  background: #5aa868;
+}
+
+/* ── Footer ── */
+.footer-doodles {
+  margin-top: 14px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  color: #a89878;
+  letter-spacing: 1px;
+}
+
+/* ── Error shake ── */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+.shake { animation: shake 0.35s ease; }
