@@ -1,7 +1,7 @@
 # Calculator
 
 A simple and responsive calculator built using HTML, CSS, and JavaScript. This project was created to practice the basics of web development and JavaScript logic while building a small, functional application.
-
+#live : https://calculator-med.netlify.app/
 ## Features
 
 * Basic arithmetic operations
